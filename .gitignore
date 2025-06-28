@@ -12,6 +12,8 @@ ENV/
 # Results
 experiment_results.json
 results_*.json
+scaling_experiment_results*.json
+*.png
 
 # IDE
 .vscode/
@@ -26,3 +28,12 @@ Thumbs.db
 # Model cache
 .cache/
 models/
+
+# Data
+data/
+arc.py
+*.csv
+
+# Logs
+*.log
+wandb/

@@ -12,6 +12,11 @@ ENV/
 # Results
 experiment_results.json
 results_*.json
+<<<<<<< HEAD
+=======
+scaling_experiment_results*.json
+*.png
+>>>>>>> e5a6854093bf2dd5b2dbf07382c6109e1445cd6e
 
 # IDE
 .vscode/
@@ -26,3 +31,15 @@ Thumbs.db
 # Model cache
 .cache/
 models/
+<<<<<<< HEAD
+=======
+
+# Data
+data/
+arc.py
+*.csv
+
+# Logs
+*.log
+wandb/
+>>>>>>> e5a6854093bf2dd5b2dbf07382c6109e1445cd6e

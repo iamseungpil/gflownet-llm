@@ -8,6 +8,7 @@ from typing import Dict, List, Tuple, Optional
 import re
 import wandb
 from tqdm import tqdm
+from arc import train_problems, validation_problems
 
 # Color mapping for ARC grids (from the provided code)
 COLOR_MAP = {
@@ -32,14 +33,14 @@ class ARCLLMExperiment:
         )
         self.model.eval()
         
-        # 데이터 경로 설정
-        self.arc_path = Path("../../arc-prize-2024/arc-agi_training_challenges.json")
-        self.rearc_path = Path("../../re-arc")
-        self.harc_path = Path("../../h-arc")
+        # 로컬 데이터 경로 설정 (증강 데이터용)
+        self.rearc_path = Path("data/re-arc/re_arc_extracted/re_arc/tasks")
+        self.harc_path = Path("data/h-arc")
         
         # W&B 초기화
         self.use_wandb = use_wandb
         if self.use_wandb:
+            wandb.login(key="2f4e627868f1f9dad10bcb1a14fbf96817e6baa9")
             wandb.init(
                 project="arc-llm-augmentation",
                 config={
@@ -48,11 +49,14 @@ class ARCLLMExperiment:
                 }
             )
     
-    def load_arc_task(self, task_id: str) -> Dict:
-        """원본 ARC 태스크 로드"""
-        with open(self.arc_path, 'r') as f:
-            data = json.load(f)
-        return data.get(task_id, None)
+    def load_arc_task(self, task_id: str):
+        """arc-py 라이브러리에서 원본 ARC 태스크 로드"""
+        all_problems = train_problems + validation_problems
+        
+        for problem in all_problems:
+            if problem.uid == task_id:
+                return problem
+        return None
     
     def load_rearc_augmentations(self, task_id: str) -> List[Dict]:
         """RE-ARC 증강 데이터 로드 및 검증"""
@@ -180,13 +184,13 @@ Find the pattern in the input-output examples and apply it to the test input.
 
 Training Examples:
 """
-        train_examples = task['train'][:num_examples] if num_examples else task['train']
+        train_pairs = task.train_pairs[:num_examples] if num_examples else task.train_pairs
         
-        for i, example in enumerate(train_examples):
-            prompt += f"\nExample {i+1}:\nInput:\n{self.grid_to_string(example['input'], use_colors)}\n"
-            prompt += f"Output:\n{self.grid_to_string(example['output'], use_colors)}\n"
+        for i, pair in enumerate(train_pairs):
+            prompt += f"\nExample {i+1}:\nInput:\n{self.grid_to_string(pair.x.tolist(), use_colors)}\n"
+            prompt += f"Output:\n{self.grid_to_string(pair.y.tolist(), use_colors)}\n"
         
-        prompt += f"\nTest Input:\n{self.grid_to_string(task['test'][0]['input'], use_colors)}\n"
+        prompt += f"\nTest Input:\n{self.grid_to_string(task.test_pairs[0].x.tolist(), use_colors)}\n"
         if use_colors:
             prompt += "\nProvide only the output grid in the same format (colors separated by spaces, rows on new lines):"
         else:
@@ -211,9 +215,9 @@ Find the pattern and apply it to the test input.
 
 Original Training Examples:
 """
-        for i, example in enumerate(task['train']):
-            prompt += f"\nExample {i+1}:\nInput:\n{self.grid_to_string(example['input'], use_colors)}\n"
-            prompt += f"Output:\n{self.grid_to_string(example['output'], use_colors)}\n"
+        for i, pair in enumerate(task.train_pairs):
+            prompt += f"\nExample {i+1}:\nInput:\n{self.grid_to_string(pair.x.tolist(), use_colors)}\n"
+            prompt += f"Output:\n{self.grid_to_string(pair.y.tolist(), use_colors)}\n"
         
         # 지정된 개수만큼 증강 데이터 추가
         if augmented_examples and num_augmented > 0:
@@ -223,7 +227,7 @@ Original Training Examples:
                 prompt += f"\nAugmented Example {i+1}:\nInput:\n{self.grid_to_string(example['input'], use_colors)}\n"
                 prompt += f"Output:\n{self.grid_to_string(example['output'], use_colors)}\n"
         
-        prompt += f"\nTest Input:\n{self.grid_to_string(task['test'][0]['input'], use_colors)}\n"
+        prompt += f"\nTest Input:\n{self.grid_to_string(task.test_pairs[0].x.tolist(), use_colors)}\n"
         if use_colors:
             prompt += "\nProvide only the output grid in the same format (colors separated by spaces, rows on new lines):"
         else:
@@ -290,7 +294,7 @@ Original Training Examples:
     def evaluate_with_candidates(self, task: Dict, prompt: str, 
                                 num_candidates: int = 5, use_colors: bool = False) -> Tuple[float, List[bool]]:
         """여러 candidate를 생성하여 정확도 측정"""
-        expected_output = task['test'][0]['output']
+        expected_output = task.test_pairs[0].y.tolist()
         correct_predictions = []
         
         for _ in range(num_candidates):
@@ -329,7 +333,7 @@ Original Training Examples:
         
         # 1. Baseline - 원본 데이터 개수 변화
         print("\n=== Baseline Experiment ===")
-        baseline_sizes = range(1, len(task['train']) + 1)
+        baseline_sizes = range(1, len(task.train_pairs) + 1)
         baseline_accuracies = []
         
         for num_examples in baseline_sizes:
@@ -364,7 +368,7 @@ Original Training Examples:
             max_augmented = min(10, len(rearc_examples))  # 최대 10개까지
             
             for num_augmented in range(0, max_augmented + 1):
-                print(f"\nTesting with {len(task['train'])} original + {num_augmented} RE-ARC examples...")
+                print(f"\nTesting with {len(task.train_pairs)} original + {num_augmented} RE-ARC examples...")
                 prompt = self.create_augmented_prompt(task, rearc_examples, "RE-ARC", num_augmented, use_colors)
                 accuracy, predictions = self.evaluate_with_candidates(task, prompt, num_candidates, use_colors)
                 
@@ -380,7 +384,7 @@ Original Training Examples:
                     wandb.log({
                         're-arc_accuracy': accuracy,
                         're-arc_num_augmented': num_augmented,
-                        're-arc_total_examples': len(task['train']) + num_augmented
+                        're-arc_total_examples': len(task.train_pairs) + num_augmented
                     })
             
             # 정확도 변화량 계산
@@ -396,7 +400,7 @@ Original Training Examples:
             max_augmented = min(10, len(harc_examples))  # 최대 10개까지
             
             for num_augmented in range(0, max_augmented + 1):
-                print(f"\nTesting with {len(task['train'])} original + {num_augmented} H-ARC examples...")
+                print(f"\nTesting with {len(task.train_pairs)} original + {num_augmented} H-ARC examples...")
                 prompt = self.create_augmented_prompt(task, harc_examples, "H-ARC", num_augmented, use_colors)
                 accuracy, predictions = self.evaluate_with_candidates(task, prompt, num_candidates, use_colors)
                 
@@ -412,7 +416,7 @@ Original Training Examples:
                     wandb.log({
                         'h-arc_accuracy': accuracy,
                         'h-arc_num_augmented': num_augmented,
-                        'h-arc_total_examples': len(task['train']) + num_augmented
+                        'h-arc_total_examples': len(task.train_pairs) + num_augmented
                     })
             
             # 정확도 변화량 계산
@@ -479,10 +483,7 @@ Original Training Examples:
 
 def main():
     """메인 실행 함수"""
-    # W&B 로그인 (필요한 경우)
-    # wandb.login()
-    
-    # 실험 초기화
+    # 실험 초기화 (W&B 로그인은 클래스 내부에서 자동 처리)
     experiment = ARCLLMExperiment(use_wandb=True)
     
     # 데이터 스케일링 실험 실행 (숫자 형식)

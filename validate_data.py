@@ -1,35 +1,38 @@
 import json
 from pathlib import Path
 import numpy as np
+from arc import train_problems, validation_problems
 
 def validate_augmentation_data(task_id: str = "6150a2bd"):
     """RE-ARC와 H-ARC 데이터가 해당 문제에 대한 것인지 검증"""
     
-    # 경로 설정
-    arc_path = Path("../../arc-prize-2024/arc-agi_training_challenges.json")
-    rearc_path = Path("../../re-arc") / f"{task_id}.json"
-    harc_path = Path("../../h-arc") / f"{task_id}.json"
+    # 경로 설정 (로컬 데이터용)
+    rearc_path = Path("data/re-arc/re_arc_extracted/re_arc/tasks") / f"{task_id}.json"
+    harc_path = Path("data/h-arc") / f"{task_id}.json"
     
     print(f"Validating augmentation data for task: {task_id}")
     print("=" * 60)
     
-    # 1. 원본 ARC 데이터 로드
-    with open(arc_path, 'r') as f:
-        arc_data = json.load(f)
+    # 1. arc-py 라이브러리에서 원본 ARC 데이터 찾기
+    original_task = None
+    all_problems = train_problems + validation_problems
     
-    if task_id not in arc_data:
-        print(f"Error: Task {task_id} not found in original ARC data!")
+    for problem in all_problems:
+        if problem.uid == task_id:
+            original_task = problem
+            break
+    
+    if not original_task:
+        print(f"Error: Task {task_id} not found in arc-py library!")
         return
-    
-    original_task = arc_data[task_id]
     print(f"\nOriginal ARC Task {task_id}:")
-    print(f"- Training examples: {len(original_task['train'])}")
-    print(f"- Test examples: {len(original_task['test'])}")
+    print(f"- Training examples: {len(original_task.train_pairs)}")
+    print(f"- Test examples: {len(original_task.test_pairs)}")
     
     # 원본 데이터의 그리드 크기 확인
-    for i, example in enumerate(original_task['train']):
-        input_shape = np.array(example['input']).shape
-        output_shape = np.array(example['output']).shape
+    for i, pair in enumerate(original_task.train_pairs):
+        input_shape = pair.x.shape
+        output_shape = pair.y.shape
         print(f"  Train {i+1}: Input {input_shape} -> Output {output_shape}")
     
     # 2. RE-ARC 데이터 검증
@@ -77,10 +80,10 @@ def validate_augmentation_data(task_id: str = "6150a2bd"):
         print(f"\nTotal valid RE-ARC examples: {valid_count}/{len(examples)}")
         
         # 변환 패턴 확인 (첫 번째 유효한 예제로)
-        if valid_count > 0 and len(original_task['train']) > 0:
+        if valid_count > 0 and len(original_task.train_pairs) > 0:
             print("\nChecking transformation consistency:")
-            orig_input = np.array(original_task['train'][0]['input'])
-            orig_output = np.array(original_task['train'][0]['output'])
+            orig_input = original_task.train_pairs[0].x
+            orig_output = original_task.train_pairs[0].y
             
             for i, example in enumerate(examples[:3]):
                 if isinstance(example, dict) and 'input' in example and 'output' in example:

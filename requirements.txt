@@ -6,3 +6,4 @@ bitsandbytes>=0.41.0
 wandb>=0.15.0
 tqdm>=4.65.0
 matplotlib>=3.7.0
+arc-py @ git+https://github.com/xu3kev/arc-py.git@bdad42e595c395decac6e40d9b96c33e7d52656f

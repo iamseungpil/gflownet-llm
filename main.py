@@ -35,7 +35,7 @@ class ARCLLMExperiment:
         
         # 로컬 데이터 경로 설정 (증강 데이터용)
         self.rearc_path = Path("data/re-arc/re_arc_extracted/re_arc/tasks")
-        self.harc_path = Path("data/h-arc")
+        self.harc_csv_path = Path("data/h-arc/arc_data/ARC_training_tasks.csv")
         
         # W&B 초기화
         self.use_wandb = use_wandb
@@ -69,22 +69,29 @@ class ARCLLMExperiment:
                 
                 # 데이터 형식 확인
                 print(f"\nRE-ARC data structure for {task_id}:")
-                print(f"Keys: {list(rearc_data.keys())[:5]}...")
+                print(f"Data type: {type(rearc_data)}")
                 
                 # RE-ARC 형식에 따라 데이터 추출
                 if isinstance(rearc_data, list):
-                    # 리스트 형식인 경우
+                    # 리스트 형식인 경우 (실제 형태)
                     augmented_examples = rearc_data
-                elif 'train' in rearc_data:
-                    # 기존 ARC 형식과 유사한 경우
-                    augmented_examples = rearc_data.get('train', [])
-                elif 'augmented_examples' in rearc_data:
-                    augmented_examples = rearc_data['augmented_examples']
+                    print(f"Found {len(rearc_data)} examples in list format")
+                elif isinstance(rearc_data, dict):
+                    print(f"Keys: {list(rearc_data.keys())[:5]}...")
+                    if 'train' in rearc_data:
+                        # 기존 ARC 형식과 유사한 경우
+                        augmented_examples = rearc_data.get('train', [])
+                    elif 'augmented_examples' in rearc_data:
+                        augmented_examples = rearc_data['augmented_examples']
+                    else:
+                        # 다른 형식인 경우 첫 번째 키의 값 사용
+                        first_key = list(rearc_data.keys())[0]
+                        if isinstance(rearc_data[first_key], dict) and 'input' in rearc_data[first_key]:
+                            augmented_examples = [rearc_data[key] for key in list(rearc_data.keys())]
+                        else:
+                            augmented_examples = []
                 else:
-                    # 다른 형식인 경우 첫 번째 키의 값 사용
-                    first_key = list(rearc_data.keys())[0]
-                    if isinstance(rearc_data[first_key], dict) and 'input' in rearc_data[first_key]:
-                        augmented_examples = [rearc_data[key] for key in list(rearc_data.keys())]
+                    augmented_examples = []
                 
                 # 데이터 검증
                 valid_examples = []
@@ -100,43 +107,13 @@ class ARCLLMExperiment:
         return augmented_examples
     
     def load_harc_augmentations(self, task_id: str) -> List[Dict]:
-        """H-ARC 증강 데이터 로드 및 검증"""
-        augmented_examples = []
-        harc_file = self.harc_path / f"{task_id}.json"
+        """H-ARC 데이터 로드 (실제로는 인간 행동 데이터이므로 빈 리스트 반환)"""
+        print(f"\nH-ARC contains human behavioral data for {task_id}, not augmented examples")
+        print("H-ARC provides action traces, timing, and task completion data")
+        print("For this experiment, we'll focus on RE-ARC augmented examples only")
         
-        if harc_file.exists():
-            with open(harc_file, 'r') as f:
-                harc_data = json.load(f)
-                
-                # 데이터 형식 확인
-                print(f"\nH-ARC data structure for {task_id}:")
-                print(f"Keys: {list(harc_data.keys())[:5]}...")
-                
-                # H-ARC 형식에 따라 데이터 추출
-                if isinstance(harc_data, list):
-                    augmented_examples = harc_data
-                elif 'train' in harc_data:
-                    augmented_examples = harc_data.get('train', [])
-                elif 'human_augmented' in harc_data:
-                    augmented_examples = harc_data['human_augmented']
-                else:
-                    # 다른 형식인 경우
-                    first_key = list(harc_data.keys())[0]
-                    if isinstance(harc_data[first_key], dict) and 'input' in harc_data[first_key]:
-                        augmented_examples = [harc_data[key] for key in list(harc_data.keys())]
-                
-                # 데이터 검증
-                valid_examples = []
-                for i, example in enumerate(augmented_examples):
-                    if isinstance(example, dict) and 'input' in example and 'output' in example:
-                        valid_examples.append(example)
-                        if i < 2:  # 처음 2개 예제 확인
-                            print(f"H-ARC Example {i+1} - Input shape: {np.array(example['input']).shape}")
-                
-                augmented_examples = valid_examples
-                print(f"Loaded {len(augmented_examples)} valid H-ARC examples")
-        
-        return augmented_examples
+        # H-ARC는 증강 예제가 아니라 인간 행동 데이터이므로 빈 리스트 반환
+        return []
     
     def grid_to_string(self, grid: List[List[int]], use_colors: bool = False) -> str:
         """2D 그리드를 문자열로 변환 (옵션: 색상 이름 사용)"""

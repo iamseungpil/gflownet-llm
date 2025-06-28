@@ -6,9 +6,9 @@ from arc import train_problems, validation_problems
 def validate_augmentation_data(task_id: str = "6150a2bd"):
     """RE-ARC와 H-ARC 데이터가 해당 문제에 대한 것인지 검증"""
     
-    # 경로 설정 (로컬 데이터용)
+    # 경로 설정 (실제 데이터 구조에 맞게)
     rearc_path = Path("data/re-arc/re_arc_extracted/re_arc/tasks") / f"{task_id}.json"
-    harc_path = Path("data/h-arc") / f"{task_id}.json"
+    harc_csv_path = Path("data/h-arc/arc_data/ARC_training_tasks.csv")
     
     print(f"Validating augmentation data for task: {task_id}")
     print("=" * 60)
@@ -100,54 +100,35 @@ def validate_augmentation_data(task_id: str = "6150a2bd"):
     else:
         print(f"RE-ARC file not found: {rearc_path}")
     
-    # 3. H-ARC 데이터 검증
+    # 3. H-ARC 데이터 검증 (CSV 형태의 인간 행동 데이터)
     print(f"\n\nH-ARC Data Validation:")
     print("-" * 40)
     
-    if harc_path.exists():
-        with open(harc_path, 'r') as f:
-            harc_data = json.load(f)
-        
-        print(f"H-ARC file exists: {harc_path}")
-        print(f"Data type: {type(harc_data)}")
-        
-        if isinstance(harc_data, dict):
-            print(f"Keys in H-ARC data: {list(harc_data.keys())[:10]}")
+    if harc_csv_path.exists():
+        import pandas as pd
+        try:
+            df = pd.read_csv(harc_csv_path)
+            task_data = df[df['task_name'] == f"{task_id}.json"]
             
-            # 데이터 구조 분석
-            if 'train' in harc_data:
-                examples = harc_data['train']
-                print(f"Found 'train' key with {len(examples)} examples")
-            elif 'human_augmented' in harc_data:
-                examples = harc_data['human_augmented']
-                print(f"Found 'human_augmented' key with {len(examples)} examples")
-            elif isinstance(list(harc_data.values())[0], dict) and 'input' in list(harc_data.values())[0]:
-                examples = list(harc_data.values())
-                print(f"Found {len(examples)} examples in dict format")
+            print(f"H-ARC CSV file exists: {harc_csv_path}")
+            print(f"Total entries in H-ARC: {len(df)}")
+            print(f"Entries for task {task_id}: {len(task_data)}")
+            
+            if len(task_data) > 0:
+                print(f"Data columns: {list(df.columns)}")
+                print(f"Task types: {task_data['task_type'].unique()}")
+                print(f"Grid sizes for {task_id}:")
+                for _, row in task_data.iterrows():
+                    print(f"  {row['example_type']} {row['example_number']}: {row['input_height']}x{row['input_width']} -> {row['output_height']}x{row['output_width']}")
+                
+                print(f"\nH-ARC contains human behavioral data (not augmented examples)")
+                print(f"This includes action traces, timing data, and task completion information")
             else:
-                examples = []
-                print("Unknown H-ARC format!")
-        elif isinstance(harc_data, list):
-            examples = harc_data
-            print(f"Found {len(examples)} examples in list format")
-        else:
-            examples = []
-            print(f"Unexpected data type: {type(harc_data)}")
-        
-        # 예제 검증
-        valid_count = 0
-        for i, example in enumerate(examples[:5]):  # 처음 5개만 확인
-            if isinstance(example, dict) and 'input' in example and 'output' in example:
-                input_shape = np.array(example['input']).shape
-                output_shape = np.array(example['output']).shape
-                print(f"  Example {i+1}: Input {input_shape} -> Output {output_shape} ✓")
-                valid_count += 1
-            else:
-                print(f"  Example {i+1}: Invalid format ✗")
-        
-        print(f"\nTotal valid H-ARC examples: {valid_count}/{len(examples)}")
+                print(f"No H-ARC data found for task {task_id}")
+        except Exception as e:
+            print(f"Error reading H-ARC CSV: {e}")
     else:
-        print(f"H-ARC file not found: {harc_path}")
+        print(f"H-ARC CSV file not found: {harc_csv_path}")
     
     print("\n" + "=" * 60)
     print("Validation complete!")

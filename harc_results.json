@@ -1,0 +1,82 @@
+{
+  "6150a2bd": {
+    "task_id": "6150a2bd",
+    "num_human_traces": 0,
+    "results_by_prompt_type": {
+      "full_trace": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      },
+      "hint": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      }
+    }
+  },
+  "178fcbfb": {
+    "task_id": "178fcbfb",
+    "num_human_traces": 0,
+    "results_by_prompt_type": {
+      "full_trace": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      },
+      "hint": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      }
+    }
+  },
+  "1190e5a7": {
+    "task_id": "1190e5a7",
+    "num_human_traces": 0,
+    "results_by_prompt_type": {
+      "full_trace": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      },
+      "hint": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      }
+    }
+  },
+  "150deff5": {
+    "task_id": "150deff5",
+    "num_human_traces": 0,
+    "results_by_prompt_type": {
+      "full_trace": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      },
+      "hint": {
+        "0": {
+          "accuracy": 0.0,
+          "correct_count": 0,
+          "total_candidates": 5
+        }
+      }
+    }
+  }
+}

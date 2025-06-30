@@ -1,0 +1,146 @@
+{
+  "6150a2bd": {
+    "task_id": "6150a2bd",
+    "num_rearc_examples": 1000,
+    "results_by_augmentation": {
+      "0": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "1": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "2": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "3": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "5": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "10": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      }
+    }
+  },
+  "178fcbfb": {
+    "task_id": "178fcbfb",
+    "num_rearc_examples": 1000,
+    "results_by_augmentation": {
+      "0": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "1": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "2": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "3": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "5": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "10": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      }
+    }
+  },
+  "1190e5a7": {
+    "task_id": "1190e5a7",
+    "num_rearc_examples": 1000,
+    "results_by_augmentation": {
+      "0": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "1": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "2": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "3": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "5": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "10": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      }
+    }
+  },
+  "150deff5": {
+    "task_id": "150deff5",
+    "num_rearc_examples": 1000,
+    "results_by_augmentation": {
+      "0": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "1": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "2": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "3": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "5": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      },
+      "10": {
+        "accuracy": 0.0,
+        "correct_count": 0,
+        "total_candidates": 5
+      }
+    }
+  }
+}

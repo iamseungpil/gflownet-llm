@@ -49,7 +49,10 @@ class HuggingFaceModel(BaseARCModel):
         self.device = torch.device(device if device else ("cuda" if torch.cuda.is_available() else "cpu"))
         
         print(f"Loading {model_name}...")
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        cache_dir = os.getenv('HF_HOME', '/data/.cache/huggingface')
+        print(f"Using cache directory: {cache_dir}")
+        
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
         
         if "qwen" in model_name.lower():
             self.tokenizer.pad_token = self.tokenizer.eos_token
@@ -57,7 +60,8 @@ class HuggingFaceModel(BaseARCModel):
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
             torch_dtype=torch.float16,
-            device_map="auto"
+            device_map="auto",
+            cache_dir=cache_dir
         )
         self.model.eval()
     
@@ -607,19 +611,30 @@ Training Examples:
                         prompt = self.create_augmented_prompt(task, augmented_examples, num_aug, use_colors=False)
                     
                     correct_count = 0
+                    responses_and_predictions = []
                     for _ in range(num_candidates):
                         response = model.generate_response(prompt, temperature=0.3)
                         predicted_grid = self.extract_grid_from_response(response, from_colors=False)
                         expected_output = task.test_pairs[0].y.tolist()
                         
-                        if self.evaluate_solution(predicted_grid, expected_output):
+                        is_correct = self.evaluate_solution(predicted_grid, expected_output)
+                        if is_correct:
                             correct_count += 1
+                        
+                        responses_and_predictions.append({
+                            'prompt': prompt,
+                            'response': response,
+                            'predicted_grid': predicted_grid,
+                            'expected_grid': expected_output,
+                            'is_correct': is_correct
+                        })
                     
                     accuracy = correct_count / num_candidates
                     model_results['re-arc'][num_aug] = {
                         'accuracy': accuracy,
                         'correct_count': correct_count,
-                        'total': num_candidates
+                        'total': num_candidates,
+                        'responses_and_predictions': responses_and_predictions
                     }
                     print(f"    Accuracy: {accuracy:.2%}")
                 
@@ -637,19 +652,30 @@ Training Examples:
                         prompt = self.create_harc_grid_prompt(task, action_traces, num_traces, prompt_type, use_colors=False)
                         
                         correct_count = 0
+                        responses_and_predictions = []
                         for _ in range(num_candidates):
                             response = model.generate_response(prompt, temperature=0.3)
                             predicted_grid = self.extract_grid_from_response(response, from_colors=False)
                             expected_output = task.test_pairs[0].y.tolist()
                             
-                            if self.evaluate_solution(predicted_grid, expected_output):
+                            is_correct = self.evaluate_solution(predicted_grid, expected_output)
+                            if is_correct:
                                 correct_count += 1
+                            
+                            responses_and_predictions.append({
+                                'prompt': prompt,
+                                'response': response,
+                                'predicted_grid': predicted_grid,
+                                'expected_grid': expected_output,
+                                'is_correct': is_correct
+                            })
                         
                         accuracy = correct_count / num_candidates
                         model_results['h-arc-grid'][prompt_type][num_traces] = {
                             'accuracy': accuracy,
                             'correct_count': correct_count,
-                            'total': num_candidates
+                            'total': num_candidates,
+                            'responses_and_predictions': responses_and_predictions
                         }
                         print(f"    Accuracy: {accuracy:.2%}")
                 
@@ -663,6 +689,7 @@ Training Examples:
                         print(f"  Testing with {num_examples} action examples...")
                         
                         evaluation_results = []
+                        responses_and_predictions = []
                         
                         for _ in range(num_candidates):
                             prompt = self.create_action_sequence_prompt(task, action_traces, num_examples)
@@ -671,6 +698,13 @@ Training Examples:
                             
                             eval_result = self.evaluate_action_sequence(predicted_actions, action_traces)
                             evaluation_results.append(eval_result)
+                            
+                            responses_and_predictions.append({
+                                'prompt': prompt,
+                                'response': response,
+                                'predicted_actions': predicted_actions,
+                                'evaluation': eval_result
+                            })
                         
                         avg_similarity = sum(r.get('combined_similarity', r.get('similarity', 0)) 
                                            for r in evaluation_results) / len(evaluation_results)
@@ -682,7 +716,8 @@ Training Examples:
                             'avg_similarity': avg_similarity,
                             'avg_common_actions_ratio': avg_common_ratio,
                             'exact_match_rate': exact_matches / num_candidates,
-                            'total': num_candidates
+                            'total': num_candidates,
+                            'responses_and_predictions': responses_and_predictions
                         }
                         print(f"    Avg Similarity: {avg_similarity:.3f}")
                         print(f"    Exact Match Rate: {exact_matches}/{num_candidates}")
@@ -813,34 +848,121 @@ def run_quick_test():
     print("Quick test completed!")
 
 
-def main():
-    """메인 실행 함수"""
-    import sys
-    
-    if len(sys.argv) > 1 and sys.argv[1] == "quick":
-        run_quick_test()
-        return
-    
-    # 모든 모델 설정
+def get_models_config(include_openai: bool = True, include_gemma: bool = True, include_qwen: bool = True):
+    """모델 설정을 선택적으로 생성"""
     models_config = {
         "llama3.1-8b": {
             "type": "huggingface",
             "model_name": "meta-llama/Llama-3.1-8B-Instruct"
-        },
-        "openai-o1": {
+        }
+    }
+    
+    if include_openai:
+        models_config["openai-o1"] = {
             "type": "openai",
             "model_name": "o1-preview",
             "api_key": ""
-        },
-        "gemma-7b": {
+        }
+    
+    if include_gemma:
+        models_config["gemma-7b"] = {
             "type": "huggingface",
             "model_name": "google/gemma-7b-it"
-        },
-        "qwen2.5-7b": {
+        }
+    
+    if include_qwen:
+        models_config["qwen2.5-7b"] = {
             "type": "huggingface",
             "model_name": "Qwen/Qwen2.5-7B-Instruct"
         }
-    }
+    
+    return models_config
+
+
+def print_usage():
+    """사용법 출력"""
+    print("""
+Usage: python complete_multi_model_experiment.py [options]
+
+Options:
+  quick                 Run quick test (Llama only, 1 task, 2 candidates)
+  --models MODEL1,MODEL2,...  Specify models to run (comma-separated)
+                       Available: llama3.1-8b, openai-o1, gemma-7b, qwen2.5-7b
+  --no-openai          Exclude OpenAI models (avoid API costs)
+  --no-gemma           Exclude Gemma model
+  --no-qwen            Exclude Qwen model
+  --llama-only         Run with Llama 3.1-8B only
+  --help               Show this help message
+
+Examples:
+  python complete_multi_model_experiment.py quick
+  python complete_multi_model_experiment.py --models llama3.1-8b,gemma-7b
+  python complete_multi_model_experiment.py --no-openai
+  python complete_multi_model_experiment.py --llama-only
+  python complete_multi_model_experiment.py --no-openai --no-gemma
+""")
+
+
+def main():
+    """메인 실행 함수"""
+    import sys
+    
+    # 명령행 인수 파싱
+    if "--help" in sys.argv or "-h" in sys.argv:
+        print_usage()
+        return
+    
+    if "quick" in sys.argv:
+        run_quick_test()
+        return
+    
+    # --models 옵션 확인
+    specific_models = None
+    for i, arg in enumerate(sys.argv):
+        if arg == "--models" and i + 1 < len(sys.argv):
+            specific_models = sys.argv[i + 1].split(',')
+            break
+    
+    if specific_models:
+        # 특정 모델만 선택
+        all_models_config = get_models_config(True, True, True)
+        models_config = {}
+        for model_id in specific_models:
+            if model_id in all_models_config:
+                models_config[model_id] = all_models_config[model_id]
+            else:
+                print(f"Warning: Unknown model '{model_id}'. Available models: {', '.join(all_models_config.keys())}")
+        
+        if not models_config:
+            print("Error: No valid models specified.")
+            return
+    else:
+        # 기존 로직: 제외 옵션 사용
+        include_openai = "--no-openai" not in sys.argv
+        include_gemma = "--no-gemma" not in sys.argv
+        include_qwen = "--no-qwen" not in sys.argv
+        
+        if "--llama-only" in sys.argv:
+            include_openai = False
+            include_gemma = False
+            include_qwen = False
+        
+        # 모델 설정 생성
+        models_config = get_models_config(include_openai, include_gemma, include_qwen)
+    
+    # 선택된 모델 출력
+    print(f"\n🚀 Starting Complete Multi-Model Experiment")
+    print(f"Selected models: {', '.join(models_config.keys())}")
+    
+    # OpenAI 모델이 포함되었는지 확인
+    has_openai = any('openai' in model_id for model_id in models_config.keys())
+    if not has_openai:
+        print("💰 OpenAI models excluded (no API costs)")
+    
+    print(f"📊 Testing {len(models_config)} models on 4 tasks with 3 experiment types")
+    estimated_time = len(models_config) * 60  # 모델당 약 60분
+    print(f"⏱️  Estimated time: ~{estimated_time//60}h {estimated_time%60}m")
+    print()
     
     # 실험 초기화
     experiment = CompleteMultiModelExperiment(models_config, use_wandb=True)

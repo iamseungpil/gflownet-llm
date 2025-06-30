@@ -526,7 +526,7 @@ Training Examples:
                            num_candidates: int = 5, use_colors: bool = False) -> Dict:
         """H-ARC 그리드 생성 실험 실행"""
         if task_ids is None:
-            task_ids = ["6150a2bd", "87a80de6", "9ddd00f0", "d43fd935"]
+            task_ids = ["74dd1130"]
         
         all_results = {}
         
@@ -601,7 +601,7 @@ Training Examples:
                                      num_candidates: int = 5) -> Dict:
         """Action sequence 예측 실험"""
         if task_ids is None:
-            task_ids = ["6150a2bd", "87a80de6", "9ddd00f0", "d43fd935"]
+            task_ids = ["74dd1130"]
         
         all_results = {}
         
@@ -695,7 +695,7 @@ Training Examples:
     def run_combined_experiment(self, task_ids: List[str] = None) -> Dict:
         """그리드 생성과 action sequence 예측 실험을 모두 실행"""
         if task_ids is None:
-            task_ids = ["6150a2bd", "178fcbfb", "1190e5a7", "150deff5"]
+            task_ids = ["74dd1130"]
         
         combined_results = {
             'grid_generation': {},
@@ -742,7 +742,7 @@ def main():
     experiment = HARCExperiment(use_wandb=True)
     
     # 실험할 태스크들
-    task_ids = ["6150a2bd", "178fcbfb", "1190e5a7", "150deff5"]
+    task_ids = ["74dd1130"]
     
     # 전체 실험 실행 (그리드 생성 + action sequence)
     combined_results = experiment.run_combined_experiment(task_ids)

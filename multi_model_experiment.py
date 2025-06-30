@@ -14,7 +14,7 @@ import re
 import wandb
 from tqdm import tqdm
 from arc import train_problems, validation_problems
-import openai
+from openai import OpenAI
 from abc import ABC, abstractmethod
 
 # Color mapping for ARC grids
@@ -90,9 +90,9 @@ class OpenAIModel(BaseARCModel):
         
         # API 키 설정
         if api_key:
-            openai.api_key = api_key
+            self.client = OpenAI(api_key=api_key)
         else:
-            openai.api_key = os.getenv("OPENAI_API_KEY")
+            self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         
         print(f"Initialized OpenAI {model_name}")
     
@@ -100,13 +100,13 @@ class OpenAIModel(BaseARCModel):
         try:
             # o1 모델은 temperature를 지원하지 않음
             if "o1" in self.model_name:
-                response = openai.ChatCompletion.create(
+                response = self.client.chat.completions.create(
                     model=self.model_name,
                     messages=[{"role": "user", "content": prompt}],
                     max_completion_tokens=max_tokens
                 )
             else:
-                response = openai.ChatCompletion.create(
+                response = self.client.chat.completions.create(
                     model=self.model_name,
                     messages=[{"role": "user", "content": prompt}],
                     max_tokens=max_tokens,
@@ -538,7 +538,7 @@ def main():
     experiment = MultiModelARCExperiment(models_config, use_wandb=True)
     
     # 실험할 태스크
-    task_ids = ["6150a2bd", "178fcbfb", "1190e5a7", "150deff5"]
+    task_ids = ["74dd1130"]
     
     # 실험 실행
     results = experiment.run_model_comparison(

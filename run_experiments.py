@@ -255,7 +255,7 @@ def run_all_experiments_with_action():
     print("="*60)
     
     # 공통 태스크 설정
-    task_ids = ["6150a2bd", "178fcbfb", "1190e5a7", "150deff5"]
+    task_ids = ["74dd1130"]
     
     # 1. RE-ARC 실험
     print("\n\n" + "="*60)

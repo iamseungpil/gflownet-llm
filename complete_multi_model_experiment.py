@@ -17,7 +17,7 @@ from tqdm import tqdm
 from arc import train_problems, validation_problems
 from collections import defaultdict
 from difflib import SequenceMatcher
-import openai
+from openai import OpenAI
 from abc import ABC, abstractmethod
 
 # Color mapping for ARC grids
@@ -93,22 +93,22 @@ class OpenAIModel(BaseARCModel):
         self.model_name = model_name
         
         if api_key:
-            openai.api_key = api_key
+            self.client = OpenAI(api_key=api_key)
         else:
-            openai.api_key = os.getenv("OPENAI_API_KEY")
+            self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         
         print(f"Initialized OpenAI {model_name}")
     
     def generate_response(self, prompt: str, max_tokens: int = 512, temperature: float = 0.1) -> str:
         try:
             if "o1" in self.model_name:
-                response = openai.ChatCompletion.create(
+                response = self.client.chat.completions.create(
                     model=self.model_name,
                     messages=[{"role": "user", "content": prompt}],
                     max_completion_tokens=max_tokens
                 )
             else:
-                response = openai.ChatCompletion.create(
+                response = self.client.chat.completions.create(
                     model=self.model_name,
                     messages=[{"role": "user", "content": prompt}],
                     max_tokens=max_tokens,
@@ -553,7 +553,7 @@ Training Examples:
                                num_candidates: int = 3) -> Dict:
         """모든 모델로 모든 실험 실행"""
         if task_ids is None:
-            task_ids = ["6150a2bd", "178fcbfb", "1190e5a7", "150deff5"]
+            task_ids = ["74dd1130"]
         
         all_results = {
             'experiment_summary': {
@@ -837,7 +837,7 @@ def run_quick_test():
     experiment = CompleteMultiModelExperiment(models_config, use_wandb=False)
     
     results = experiment.run_complete_experiment(
-        task_ids=["6150a2bd"],
+        task_ids=["74dd1130"],
         augmentation_sizes=[0, 5],
         harc_trace_counts=[0, 3],
         harc_action_examples=[0, 3],
@@ -969,7 +969,7 @@ def main():
     
     # 완전한 실험 실행
     results = experiment.run_complete_experiment(
-        task_ids=["6150a2bd", "178fcbfb", "1190e5a7", "150deff5"],
+        task_ids=["74dd1130"],
         augmentation_sizes=[0, 5, 10],
         harc_trace_counts=[0, 3, 5],
         harc_action_examples=[0, 3],

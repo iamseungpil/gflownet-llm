@@ -207,7 +207,7 @@ Original Training Examples:
                             num_candidates: int = 5, use_colors: bool = False) -> Dict:
         """RE-ARC 실험 실행"""
         if task_ids is None:
-            task_ids = ["6150a2bd", "87a80de6", "9ddd00f0", "d43fd935"]
+            task_ids = ["74dd1130"]
         
         all_results = {}
         
@@ -281,7 +281,7 @@ def main():
     experiment = REARCExperiment(use_wandb=True)
     
     # 실험할 태스크들
-    task_ids = ["6150a2bd", "178fcbfb", "1190e5a7", "150deff5"]
+    task_ids = ["74dd1130"]
     
     # 증강 데이터 개수 설정
     augmented_sizes = [0, 1, 2, 3, 5, 10, 20]

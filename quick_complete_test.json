@@ -1,0 +1,646 @@
+{
+  "experiment_summary": {
+    "models_tested": [
+      "llama3.1-8b"
+    ],
+    "tasks_tested": [
+      "74dd1130"
+    ],
+    "experiment_types": [
+      "re-arc",
+      "h-arc-grid",
+      "h-arc-action"
+    ]
+  },
+  "detailed_results": {
+    "74dd1130": {
+      "task_id": "74dd1130",
+      "num_augmented_available": 20,
+      "num_action_traces": 0,
+      "model_results": {
+        "llama3.1-8b": {
+          "re-arc": {
+            "0": {
+              "accuracy": 0.0,
+              "correct_count": 0,
+              "total": 2,
+              "responses_and_predictions": [
+                {
+                  "prompt": [
+                    {
+                      "role": "system",
+                      "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                    },
+                    {
+                      "role": "user",
+                      "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n        Here are the input grids for the test example:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                    }
+                  ],
+                  "response": "Red Brown Yellow\nBrown Yellow Green\nYellow Green Brown",
+                  "predicted_grid": [
+                    [
+                      2,
+                      9,
+                      4
+                    ],
+                    [
+                      9,
+                      4,
+                      3
+                    ],
+                    [
+                      4,
+                      3,
+                      9
+                    ]
+                  ],
+                  "expected_grid": [
+                    [
+                      9,
+                      9,
+                      9
+                    ],
+                    [
+                      3,
+                      4,
+                      3
+                    ],
+                    [
+                      4,
+                      4,
+                      4
+                    ]
+                  ],
+                  "is_correct": false
+                },
+                {
+                  "prompt": [
+                    {
+                      "role": "system",
+                      "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                    },
+                    {
+                      "role": "user",
+                      "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n        Here are the input grids for the test example:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                    }
+                  ],
+                  "response": "Red Brown Yellow\nBrown Yellow Green\nGreen Green Yellow",
+                  "predicted_grid": [
+                    [
+                      2,
+                      9,
+                      4
+                    ],
+                    [
+                      9,
+                      4,
+                      3
+                    ],
+                    [
+                      3,
+                      3,
+                      4
+                    ]
+                  ],
+                  "expected_grid": [
+                    [
+                      9,
+                      9,
+                      9
+                    ],
+                    [
+                      3,
+                      4,
+                      3
+                    ],
+                    [
+                      4,
+                      4,
+                      4
+                    ]
+                  ],
+                  "is_correct": false
+                }
+              ]
+            },
+            "5": {
+              "accuracy": 0.0,
+              "correct_count": 0,
+              "total": 2,
+              "responses_and_predictions": [
+                {
+                  "prompt": [
+                    {
+                      "role": "system",
+                      "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                    },
+                    {
+                      "role": "user",
+                      "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n\nAdditional Examples:\nAugmented Example 1:\nInput:\nBrown Red Orange\nBrown Orange Pink\nOrange Orange Green\nOrange Gray Orange\nOrange Gray Orange\nBlue Orange Orange\nOrange Orange Orange\nOrange Red Orange\nBlue Orange Orange\nOrange Orange Orange\nPurple Purple Purple\nOrange Orange Green\nOrange Orange Brown\nBrown Orange Yellow\nGray Orange Orange\nOrange Orange Blue\nBrown Orange Orange\nBrown Green Gray\nOrange Orange Orange\nOrange Orange Orange\nOrange Pink Blue\nOrange Red Purple\nOrange Red Orange\nOutput:\nBrown Brown Orange Orange Orange Blue Orange Orange Blue Orange Purple Orange Orange Brown Gray Orange Brown Brown Orange Orange Orange Orange Orange\nRed Orange Orange Gray Gray Orange Orange Red Orange Orange Purple Orange Orange Orange Orange Orange Orange Green Orange Orange Pink Red Red\nOrange Pink Green Orange Orange Orange Orange Orange Orange Orange Purple Green Brown Yellow Orange Blue Orange Gray Orange Orange Blue Purple Orange\n\nAugmented Example 2:\nInput:\nGray Gray Gray Gray Gray Green Gray\nGray Brown Gray Gray Brown Gray Gray\nGray Gray Green Blue Gray Brown Gray\nGray Gray Gray Gray Gray Orange Gray\nOrange Gray Gray Yellow Blue Gray Orange\nYellow Yellow Gray Gray Gray Purple Green\nBrown Gray Gray Brown Gray Gray Gray\nGray Pink Gray Gray Brown Gray Gray\nYellow Orange Gray Gray Gray Gray Brown\nGray Gray Gray Blue Gray Gray Gray\nGray Gray Gray Gray Gray Orange Brown\nGray Gray Pink Gray Yellow Yellow Gray\nGray Yellow Orange Brown Gray Green Gray\nYellow Gray Green Gray Brown Brown Gray\nGray Blue Gray Gray Green Gray Blue\nGray Yellow Gray Pink Blue Gray Gray\nBlue Gray Gray Black Gray Gray Gray\nBlack Gray Gray Gray Gray Gray Gray\nBlue Green Gray Gray Gray Pink Gray\nGray Pink Green Blue Green Gray Pink\nGray Blue Gray Purple Gray Brown Gray\nGray Blue Orange Gray Gray Gray Purple\nGray Gray Blue Blue Green Gray Blue\nGray Gray Yellow Brown Black Green Yellow\nBlack Gray Gray Blue Gray Gray Yellow\nYellow Brown Gray Gray Yellow Green Gray\nGray Gray Gray Gray Pink Gray Brown\nBrown Gray Blue Yellow Gray Brown Black\nYellow Gray Pink Gray Gray Yellow Gray\nGray Gray Gray Gray Gray Gray Gray\nOutput:\nGray Gray Gray Gray Orange Yellow Brown Gray Yellow Gray Gray Gray Gray Yellow Gray Gray Blue Black Blue Gray Gray Gray Gray Gray Black Yellow Gray Brown Yellow Gray\nGray Brown Gray Gray Gray Yellow Gray Pink Orange Gray Gray Gray Yellow Gray Blue Yellow Gray Gray Green Pink Blue Blue Gray Gray Gray Brown Gray Gray Gray Gray\nGray Gray Green Gray Gray Gray Gray Gray Gray Gray Gray Pink Orange Green Gray Gray Gray Gray Gray Green Gray Orange Blue Yellow Gray Gray Gray Blue Pink Gray\nGray Gray Blue Gray Yellow Gray Brown Gray Gray Blue Gray Gray Brown Gray Gray Pink Black Gray Gray Blue Purple Gray Blue Brown Blue Gray Gray Yellow Gray Gray\nGray Brown Gray Gray Blue Gray Gray Brown Gray Gray Gray Yellow Gray Brown Green Blue Gray Gray Gray Green Gray Gray Green Black Gray Yellow Pink Gray Gray Gray\nGreen Gray Brown Orange Gray Purple Gray Gray Gray Gray Orange Yellow Green Brown Gray Gray Gray Gray Pink Gray Brown Gray Gray Green Gray Green Gray Brown Yellow Gray\nGray Gray Gray Gray Orange Green Gray Gray Brown Gray Brown Gray Gray Gray Blue Gray Gray Gray Gray Pink Gray Purple Blue Yellow Yellow Gray Brown Black Gray Gray\n\nAugmented Example 3:\nInput:\nGray Gray Brown Gray Brown Gray Gray Gray\nYellow Brown Yellow Brown Gray Brown Gray Gray\nGray Brown Brown Gray Brown Brown Brown Brown\nBrown Yellow Gray Brown Gray Brown Gray Gray\nGray Brown Gray Gray Gray Yellow Brown Gray\nOutput:\nGray Yellow Gray Brown Gray\nGray Brown Brown Yellow Brown\nBrown Yellow Brown Gray Gray\nGray Brown Gray Brown Gray\nBrown Gray Brown Gray Gray\nGray Brown Brown Brown Yellow\nGray Gray Brown Gray Brown\nGray Gray Brown Gray Gray\n\nAugmented Example 4:\nInput:\nBlue Blue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Pink\nBlue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue\nBlue Blue Blue Blue Pink Blue Blue Pink Blue Blue Pink Blue Blue Blue\nPink Blue Blue Blue Pink Blue Pink Pink Blue Blue Blue Pink Blue Blue\nPink Pink Pink Pink Blue Pink Blue Pink Blue Blue Blue Pink Pink Blue\nPink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink\nBlue Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue\nBlue Blue Blue Pink Blue Blue Blue Pink Blue Blue Blue Blue Blue Pink\nBlue Pink Blue Pink Blue Blue Blue Blue Pink Blue Blue Pink Pink Blue\nBlue Blue Blue Pink Blue Blue Blue Blue Pink Blue Blue Pink Pink Pink\nBlue Blue Pink Blue Blue Blue Blue Pink Pink Blue Blue Blue Pink Blue\nPink Blue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue\nPink Blue Blue Blue Pink Pink Blue Pink Blue Blue Blue Pink Blue Blue\nPink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue\nBlue Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Pink Blue Blue Blue Pink Pink Blue Pink Blue Pink Pink Blue Blue\nBlue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue\nBlue Blue Blue Blue Blue Blue Pink Blue Pink Pink Pink Blue Blue Pink\nBlue Blue Blue Pink Blue Blue Blue Pink Pink Blue Pink Blue Blue Blue\nBlue Pink Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Pink Blue Pink\nBlue Blue Pink Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue\nPink Pink Blue Pink Pink Blue Blue Pink Blue Blue Pink Blue Blue Blue\nBlue Blue Pink Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue\nBlue Pink Pink Blue Blue Blue Blue Pink Blue Pink Blue Pink Blue Blue\nBlue Blue Pink Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue Pink\nBlue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue\nPink Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Pink Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue\nOutput:\nBlue Blue Blue Pink Pink Pink Blue Blue Blue Blue Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue Pink Blue\nBlue Blue Blue Blue Pink Pink Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Blue Pink Blue Pink Blue Blue Blue Pink\nBlue Blue Blue Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue Pink Pink Pink Blue Pink Blue\nBlue Blue Blue Blue Pink Blue Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Pink Blue Blue Pink Blue Blue Blue Blue Blue Blue\nBlue Blue Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue Pink Pink Blue Blue Blue Blue Blue Blue\nBlue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Blue Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Pink Pink Pink Pink Blue Blue Pink Blue Blue Pink Blue Pink Blue Blue Blue Pink Blue Pink Blue Blue Blue Pink Pink Pink Pink Blue Blue Pink\nPink Blue Blue Blue Blue Blue Blue Blue Pink Pink Pink Pink Blue Blue Blue Pink Blue Pink Pink Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue\nBlue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink Pink Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink\nPink Pink Pink Blue Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Pink Pink Blue Blue Blue Pink Pink Blue Blue Blue Blue Blue\nBlue Blue Blue Pink Pink Blue Blue Blue Pink Pink Blue Blue Pink Blue Blue Pink Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Blue Blue Blue\nBlue Blue Blue Blue Pink Blue Pink Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nPink Blue Blue Blue Blue Pink Blue Pink Blue Pink Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue Blue Pink Blue Blue Blue\n\nAugmented Example 5:\nInput:\nYellow Yellow Yellow Green Yellow Green Yellow Green Yellow Yellow Green Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Green Green Yellow Green Yellow Yellow Green Yellow Green Green Yellow Yellow Yellow Yellow Yellow Yellow Green\nYellow Yellow Yellow Yellow Yellow Yellow Green Green Yellow Green Green Yellow Yellow Green Green Yellow Yellow Green Yellow Yellow\nGreen Yellow Yellow Green Yellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Yellow Green Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Green Yellow Yellow Green Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Green Green\nYellow Yellow Green Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Green Green Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Green Green Yellow Yellow Green Green Yellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Green\nYellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green\nGreen Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nGreen Yellow Yellow Yellow Yellow Yellow Green Green Yellow Yellow Green Yellow Green Yellow Green Green Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Yellow Green Green Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nOutput:\nYellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Green Green Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Yellow Yellow\nGreen Green Yellow Green Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Green Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow\nGreen Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Green\nYellow Green Green Yellow Green Yellow Yellow Yellow Yellow Yellow Green Green\nGreen Yellow Green Yellow Yellow Green Yellow Yellow Green Yellow Green Green\nYellow Yellow Yellow Green Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow\nYellow Green Green Yellow Green Yellow Green Yellow Yellow Yellow Yellow Yellow\nGreen Yellow Green Green Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow\nYellow Green Yellow Yellow Yellow Yellow Yellow Green Green Yellow Yellow Yellow\nGreen Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Green Yellow\nYellow Yellow Green Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Green Green Yellow Green Green Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Green Green Green Yellow Yellow Yellow Yellow Green Yellow\nYellow Green Yellow Yellow Green Yellow Green Yellow Green Yellow Yellow Yellow\n\n        Here are the input grids for the test example:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                    }
+                  ],
+                  "response": " Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow",
+                  "predicted_grid": [
+                    [
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      3,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ]
+                  ],
+                  "expected_grid": [
+                    [
+                      9,
+                      9,
+                      9
+                    ],
+                    [
+                      3,
+                      4,
+                      3
+                    ],
+                    [
+                      4,
+                      4,
+                      4
+                    ]
+                  ],
+                  "is_correct": false
+                },
+                {
+                  "prompt": [
+                    {
+                      "role": "system",
+                      "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                    },
+                    {
+                      "role": "user",
+                      "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n\nAdditional Examples:\nAugmented Example 1:\nInput:\nBrown Red Orange\nBrown Orange Pink\nOrange Orange Green\nOrange Gray Orange\nOrange Gray Orange\nBlue Orange Orange\nOrange Orange Orange\nOrange Red Orange\nBlue Orange Orange\nOrange Orange Orange\nPurple Purple Purple\nOrange Orange Green\nOrange Orange Brown\nBrown Orange Yellow\nGray Orange Orange\nOrange Orange Blue\nBrown Orange Orange\nBrown Green Gray\nOrange Orange Orange\nOrange Orange Orange\nOrange Pink Blue\nOrange Red Purple\nOrange Red Orange\nOutput:\nBrown Brown Orange Orange Orange Blue Orange Orange Blue Orange Purple Orange Orange Brown Gray Orange Brown Brown Orange Orange Orange Orange Orange\nRed Orange Orange Gray Gray Orange Orange Red Orange Orange Purple Orange Orange Orange Orange Orange Orange Green Orange Orange Pink Red Red\nOrange Pink Green Orange Orange Orange Orange Orange Orange Orange Purple Green Brown Yellow Orange Blue Orange Gray Orange Orange Blue Purple Orange\n\nAugmented Example 2:\nInput:\nGray Gray Gray Gray Gray Green Gray\nGray Brown Gray Gray Brown Gray Gray\nGray Gray Green Blue Gray Brown Gray\nGray Gray Gray Gray Gray Orange Gray\nOrange Gray Gray Yellow Blue Gray Orange\nYellow Yellow Gray Gray Gray Purple Green\nBrown Gray Gray Brown Gray Gray Gray\nGray Pink Gray Gray Brown Gray Gray\nYellow Orange Gray Gray Gray Gray Brown\nGray Gray Gray Blue Gray Gray Gray\nGray Gray Gray Gray Gray Orange Brown\nGray Gray Pink Gray Yellow Yellow Gray\nGray Yellow Orange Brown Gray Green Gray\nYellow Gray Green Gray Brown Brown Gray\nGray Blue Gray Gray Green Gray Blue\nGray Yellow Gray Pink Blue Gray Gray\nBlue Gray Gray Black Gray Gray Gray\nBlack Gray Gray Gray Gray Gray Gray\nBlue Green Gray Gray Gray Pink Gray\nGray Pink Green Blue Green Gray Pink\nGray Blue Gray Purple Gray Brown Gray\nGray Blue Orange Gray Gray Gray Purple\nGray Gray Blue Blue Green Gray Blue\nGray Gray Yellow Brown Black Green Yellow\nBlack Gray Gray Blue Gray Gray Yellow\nYellow Brown Gray Gray Yellow Green Gray\nGray Gray Gray Gray Pink Gray Brown\nBrown Gray Blue Yellow Gray Brown Black\nYellow Gray Pink Gray Gray Yellow Gray\nGray Gray Gray Gray Gray Gray Gray\nOutput:\nGray Gray Gray Gray Orange Yellow Brown Gray Yellow Gray Gray Gray Gray Yellow Gray Gray Blue Black Blue Gray Gray Gray Gray Gray Black Yellow Gray Brown Yellow Gray\nGray Brown Gray Gray Gray Yellow Gray Pink Orange Gray Gray Gray Yellow Gray Blue Yellow Gray Gray Green Pink Blue Blue Gray Gray Gray Brown Gray Gray Gray Gray\nGray Gray Green Gray Gray Gray Gray Gray Gray Gray Gray Pink Orange Green Gray Gray Gray Gray Gray Green Gray Orange Blue Yellow Gray Gray Gray Blue Pink Gray\nGray Gray Blue Gray Yellow Gray Brown Gray Gray Blue Gray Gray Brown Gray Gray Pink Black Gray Gray Blue Purple Gray Blue Brown Blue Gray Gray Yellow Gray Gray\nGray Brown Gray Gray Blue Gray Gray Brown Gray Gray Gray Yellow Gray Brown Green Blue Gray Gray Gray Green Gray Gray Green Black Gray Yellow Pink Gray Gray Gray\nGreen Gray Brown Orange Gray Purple Gray Gray Gray Gray Orange Yellow Green Brown Gray Gray Gray Gray Pink Gray Brown Gray Gray Green Gray Green Gray Brown Yellow Gray\nGray Gray Gray Gray Orange Green Gray Gray Brown Gray Brown Gray Gray Gray Blue Gray Gray Gray Gray Pink Gray Purple Blue Yellow Yellow Gray Brown Black Gray Gray\n\nAugmented Example 3:\nInput:\nGray Gray Brown Gray Brown Gray Gray Gray\nYellow Brown Yellow Brown Gray Brown Gray Gray\nGray Brown Brown Gray Brown Brown Brown Brown\nBrown Yellow Gray Brown Gray Brown Gray Gray\nGray Brown Gray Gray Gray Yellow Brown Gray\nOutput:\nGray Yellow Gray Brown Gray\nGray Brown Brown Yellow Brown\nBrown Yellow Brown Gray Gray\nGray Brown Gray Brown Gray\nBrown Gray Brown Gray Gray\nGray Brown Brown Brown Yellow\nGray Gray Brown Gray Brown\nGray Gray Brown Gray Gray\n\nAugmented Example 4:\nInput:\nBlue Blue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Pink\nBlue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue\nBlue Blue Blue Blue Pink Blue Blue Pink Blue Blue Pink Blue Blue Blue\nPink Blue Blue Blue Pink Blue Pink Pink Blue Blue Blue Pink Blue Blue\nPink Pink Pink Pink Blue Pink Blue Pink Blue Blue Blue Pink Pink Blue\nPink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink\nBlue Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue\nBlue Blue Blue Pink Blue Blue Blue Pink Blue Blue Blue Blue Blue Pink\nBlue Pink Blue Pink Blue Blue Blue Blue Pink Blue Blue Pink Pink Blue\nBlue Blue Blue Pink Blue Blue Blue Blue Pink Blue Blue Pink Pink Pink\nBlue Blue Pink Blue Blue Blue Blue Pink Pink Blue Blue Blue Pink Blue\nPink Blue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue\nPink Blue Blue Blue Pink Pink Blue Pink Blue Blue Blue Pink Blue Blue\nPink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue\nBlue Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Pink Blue Blue Blue Pink Pink Blue Pink Blue Pink Pink Blue Blue\nBlue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue\nBlue Blue Blue Blue Blue Blue Pink Blue Pink Pink Pink Blue Blue Pink\nBlue Blue Blue Pink Blue Blue Blue Pink Pink Blue Pink Blue Blue Blue\nBlue Pink Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Pink Blue Pink\nBlue Blue Pink Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue\nPink Pink Blue Pink Pink Blue Blue Pink Blue Blue Pink Blue Blue Blue\nBlue Blue Pink Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue\nBlue Pink Pink Blue Blue Blue Blue Pink Blue Pink Blue Pink Blue Blue\nBlue Blue Pink Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue Pink\nBlue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue\nPink Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Pink Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue\nOutput:\nBlue Blue Blue Pink Pink Pink Blue Blue Blue Blue Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue Pink Blue\nBlue Blue Blue Blue Pink Pink Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Blue Pink Blue Pink Blue Blue Blue Pink\nBlue Blue Blue Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue Pink Pink Pink Blue Pink Blue\nBlue Blue Blue Blue Pink Blue Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Pink Blue Blue Pink Blue Blue Blue Blue Blue Blue\nBlue Blue Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Blue Blue Blue Pink Blue Pink Pink Blue Blue Blue Blue Blue Blue\nBlue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Blue Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nBlue Pink Pink Pink Pink Blue Blue Pink Blue Blue Pink Blue Pink Blue Blue Blue Pink Blue Pink Blue Blue Blue Pink Pink Pink Pink Blue Blue Pink\nPink Blue Blue Blue Blue Blue Blue Blue Pink Pink Pink Pink Blue Blue Blue Pink Blue Pink Pink Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue\nBlue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink Pink Blue Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink\nPink Pink Pink Blue Blue Pink Blue Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Pink Pink Blue Blue Blue Pink Pink Blue Blue Blue Blue Blue\nBlue Blue Blue Pink Pink Blue Blue Blue Pink Pink Blue Blue Pink Blue Blue Pink Blue Blue Blue Blue Pink Blue Blue Blue Pink Blue Blue Blue Blue\nBlue Blue Blue Blue Pink Blue Pink Blue Pink Pink Pink Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue\nPink Blue Blue Blue Blue Pink Blue Pink Blue Pink Blue Blue Blue Blue Blue Blue Blue Pink Blue Blue Pink Blue Blue Blue Blue Pink Blue Blue Blue\n\nAugmented Example 5:\nInput:\nYellow Yellow Yellow Green Yellow Green Yellow Green Yellow Yellow Green Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Green Green Yellow Green Yellow Yellow Green Yellow Green Green Yellow Yellow Yellow Yellow Yellow Yellow Green\nYellow Yellow Yellow Yellow Yellow Yellow Green Green Yellow Green Green Yellow Yellow Green Green Yellow Yellow Green Yellow Yellow\nGreen Yellow Yellow Green Yellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Yellow Green Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Green Yellow Yellow Green Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Green Green\nYellow Yellow Green Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Green Green Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Green Green Yellow Yellow Green Green Yellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Green\nYellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green\nGreen Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nGreen Yellow Yellow Yellow Yellow Yellow Green Green Yellow Yellow Green Yellow Green Yellow Green Green Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Yellow Green Green Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nOutput:\nYellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Green Green Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Yellow Yellow\nGreen Green Yellow Green Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Green Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow\nGreen Yellow Yellow Yellow Yellow Yellow Green Yellow Yellow Yellow Yellow Green\nYellow Green Green Yellow Green Yellow Yellow Yellow Yellow Yellow Green Green\nGreen Yellow Green Yellow Yellow Green Yellow Yellow Green Yellow Green Green\nYellow Yellow Yellow Green Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow\nYellow Green Green Yellow Green Yellow Green Yellow Yellow Yellow Yellow Yellow\nGreen Yellow Green Green Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow\nYellow Green Yellow Yellow Yellow Yellow Yellow Green Green Yellow Yellow Yellow\nGreen Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Green Yellow\nYellow Yellow Green Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Green Green Yellow Green Green Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Green Yellow\nYellow Yellow Yellow Yellow Green Yellow Green Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Green Green Green Yellow Yellow Yellow Yellow Green Yellow\nYellow Green Yellow Yellow Green Yellow Green Yellow Green Yellow Yellow Yellow\n\n        Here are the input grids for the test example:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                    }
+                  ],
+                  "response": " Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Green Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow\nYellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow",
+                  "predicted_grid": [
+                    [
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      3,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ],
+                    [
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4,
+                      4
+                    ]
+                  ],
+                  "expected_grid": [
+                    [
+                      9,
+                      9,
+                      9
+                    ],
+                    [
+                      3,
+                      4,
+                      3
+                    ],
+                    [
+                      4,
+                      4,
+                      4
+                    ]
+                  ],
+                  "is_correct": false
+                }
+              ]
+            }
+          },
+          "h-arc-grid": {
+            "full_trace": {
+              "0": {
+                "accuracy": 0.0,
+                "correct_count": 0,
+                "total": 2,
+                "responses_and_predictions": [
+                  {
+                    "prompt": [
+                      {
+                        "role": "system",
+                        "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                      },
+                      {
+                        "role": "user",
+                        "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n        Now solve this test case:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                      }
+                    ],
+                    "response": "Red Brown Yellow\nYellow Brown Yellow\nBrown Green Yellow",
+                    "predicted_grid": [
+                      [
+                        2,
+                        9,
+                        4
+                      ],
+                      [
+                        4,
+                        9,
+                        4
+                      ],
+                      [
+                        9,
+                        3,
+                        4
+                      ]
+                    ],
+                    "expected_grid": [
+                      [
+                        9,
+                        9,
+                        9
+                      ],
+                      [
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "is_correct": false
+                  },
+                  {
+                    "prompt": [
+                      {
+                        "role": "system",
+                        "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                      },
+                      {
+                        "role": "user",
+                        "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n        Now solve this test case:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                      }
+                    ],
+                    "response": "Red Brown Yellow\nYellow Brown Yellow\nBrown Green Yellow",
+                    "predicted_grid": [
+                      [
+                        2,
+                        9,
+                        4
+                      ],
+                      [
+                        4,
+                        9,
+                        4
+                      ],
+                      [
+                        9,
+                        3,
+                        4
+                      ]
+                    ],
+                    "expected_grid": [
+                      [
+                        9,
+                        9,
+                        9
+                      ],
+                      [
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "is_correct": false
+                  }
+                ]
+              }
+            },
+            "hint": {
+              "0": {
+                "accuracy": 0.0,
+                "correct_count": 0,
+                "total": 2,
+                "responses_and_predictions": [
+                  {
+                    "prompt": [
+                      {
+                        "role": "system",
+                        "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                      },
+                      {
+                        "role": "user",
+                        "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n        Now solve this test case:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                      }
+                    ],
+                    "response": "Brown Green Yellow\nBrown Yellow Brown\nBrown Green Yellow",
+                    "predicted_grid": [
+                      [
+                        9,
+                        3,
+                        4
+                      ],
+                      [
+                        9,
+                        4,
+                        9
+                      ],
+                      [
+                        9,
+                        3,
+                        4
+                      ]
+                    ],
+                    "expected_grid": [
+                      [
+                        9,
+                        9,
+                        9
+                      ],
+                      [
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "is_correct": false
+                  },
+                  {
+                    "prompt": [
+                      {
+                        "role": "system",
+                        "content": "You are an world-class puzzle solver who are extremely good at spotting patterns and solving puzzles. You are also an expert Python programmer who can write code to solve puzzles."
+                      },
+                      {
+                        "role": "user",
+                        "content": "The following is a puzzle from the ARC dataset. Given training examples of input and output grids, predict the output grid for the test inputs.\n        Each grid is represented as a 2D array where each cell is represented by a color. The available colors are: Black, Blue, Red, Green, Yellow, Gray, Pink, Orange, Purple, Brown. The grid input and output are written as a string where each cell is separated by a space and each row is separated by a newline.\n        Here are the input and output grids for the training examples:\n        Example 1:\nInput:\nRed Red Blue\nBlue Gray Blue\nGray Red Red\nOutput:\nRed Blue Gray\nRed Gray Red\nBlue Blue Red\n\nExample 2:\nInput:\nRed Red Gray\nPink Red Red\nGray Gray Gray\nOutput:\nRed Pink Gray\nRed Red Gray\nGray Red Gray\n\nExample 3:\nInput:\nBrown Brown Gray\nGray Gray Purple\nGray Purple Brown\nOutput:\nBrown Gray Gray\nBrown Gray Purple\nGray Purple Brown\n\nExample 4:\nInput:\nRed Pink Pink\nRed Blue Blue\nRed Pink Red\nOutput:\nRed Red Red\nPink Blue Pink\nPink Blue Red\n\n        Now solve this test case:\n        Input:\n        Brown Green Yellow\nBrown Yellow Yellow\nBrown Green Yellow\n\n        Please provide ONLY the output grid in the exact same format as the examples. Do not include any explanation, code, or additional text - just the color grid."
+                      }
+                    ],
+                    "response": "Brown Green Yellow\nBrown Yellow Brown\nBrown Green Yellow",
+                    "predicted_grid": [
+                      [
+                        9,
+                        3,
+                        4
+                      ],
+                      [
+                        9,
+                        4,
+                        9
+                      ],
+                      [
+                        9,
+                        3,
+                        4
+                      ]
+                    ],
+                    "expected_grid": [
+                      [
+                        9,
+                        9,
+                        9
+                      ],
+                      [
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "is_correct": false
+                  }
+                ]
+              }
+            }
+          },
+          "h-arc-action": {}
+        }
+      }
+    }
+  },
+  "model_summary": {
+    "llama3.1-8b": {
+      "re-arc_avg": 0.0,
+      "re-arc_max": 0.0,
+      "h-arc-grid_avg": 0.0,
+      "h-arc-grid_max": 0.0,
+      "h-arc-action_avg": 0,
+      "h-arc-action_max": 0
+    }
+  },
+  "best_models": {
+    "best_re_arc": "llama3.1-8b",
+    "best_h_arc_grid": "llama3.1-8b",
+    "best_h_arc_action": "llama3.1-8b"
+  }
+}
